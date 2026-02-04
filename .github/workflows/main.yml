@@ -61,9 +61,12 @@ jobs:
           ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
 
+    #
+    # Ambiente possui Webhook configurado na Tag latest do Container Registry
+    #
     #- name: Restart WebApp
     #  run: |
-    #    az webapp restart --name myapplab001 --resource-group tiagodsilvalab001
+    #    az webapp restart --name  ${{ env.CONTAINER_APP_NAME }} --resource-group ${{ env.RESOURCE_GROUP }}
 
     #- name: Deploy to Azure Container App
     #  uses: azure/container-apps-deploy@v1

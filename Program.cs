@@ -9,6 +9,7 @@ builder.Services.AddHttpClient();
 // registro no DI
 builder.Services.AddSingleton<UptimeService>();
 builder.Services.AddSingleton<CpuUsageService>();
+builder.Services.AddSingleton<MemoryUsageService>();
 
 var app = builder.Build();
 

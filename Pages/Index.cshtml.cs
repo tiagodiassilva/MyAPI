@@ -7,15 +7,18 @@ namespace MyApp.Pages
     {
         private readonly UptimeService _uptimeService;
         private readonly CpuUsageService _cpuUsageService;
+        private readonly MemoryUsageService _memoryUsageService;
 
-        public IndexModel(UptimeService uptimeService, CpuUsageService cpuUsageService)
+        public IndexModel(UptimeService uptimeService, CpuUsageService cpuUsageService, MemoryUsageService memoryUsageService)
         {
             _uptimeService = uptimeService;
             _cpuUsageService = cpuUsageService;
+            _memoryUsageService = memoryUsageService;
         }
 
         public string Uptime { get; private set; } = string.Empty;
         public string CpuUsage { get; private set; } = string.Empty;
+        public string MemoryUsage { get; private set; } = string.Empty;
 
         public void OnGet()
         {
@@ -24,6 +27,9 @@ namespace MyApp.Pages
 
             var cpu = _cpuUsageService.GetCpuUsage();
             CpuUsage = $"{cpu:F2}%";
+
+            var memory = _memoryUsageService.GetMemoryUsage();
+            MemoryUsage = $"{memory}";
         }
     }
 }
