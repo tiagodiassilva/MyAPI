@@ -5,15 +5,18 @@ namespace MyApp.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly UptimeService _uptimeService;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(UptimeService uptimeService)
     {
-        _logger = logger;
+        _uptimeService = uptimeService;
     }
+
+    public string Uptime { get; private set; }
 
     public void OnGet()
     {
-
+        var uptime = _uptimeService.GetUptime();
+        Uptime = $"{uptime.Days}d {uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
     }
 }
