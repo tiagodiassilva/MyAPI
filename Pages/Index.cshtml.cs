@@ -1,30 +1,29 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyApp.Services;
+using MyApp.Services; // para acessar UptimeService e CpuUsageService
 
-namespace MyApp.Pages;
-
-public string CpuUsage { get; private set; } = string.Empty;
-
-public class IndexModel : PageModel
+namespace MyApp.Pages
 {
-    private readonly UptimeService _uptimeService;
-    private readonly CpuUsageService _cpuUsageService;
-
-    public IndexModel(UptimeService uptimeService, CpuUsageService cpuUsageService)
+    public class IndexModel : PageModel
     {
-        _uptimeService = uptimeService;
-        _cpuUsageService = cpuUsageService;
-    }
+        private readonly UptimeService _uptimeService;
+        private readonly CpuUsageService _cpuUsageService;
 
-    public string Uptime { get; private set; }
+        public IndexModel(UptimeService uptimeService, CpuUsageService cpuUsageService)
+        {
+            _uptimeService = uptimeService;
+            _cpuUsageService = cpuUsageService;
+        }
 
-    public void OnGet()
-    {
-        var uptime = _uptimeService.GetUptime();
-        Uptime = $"{uptime.Days}d {uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
+        public string Uptime { get; private set; } = string.Empty;
+        public string CpuUsage { get; private set; } = string.Empty;
 
-        var cpuUsage = _cpuUsageService.GetCpuUsage();
-        CpuUsage = $"{cpuUsage}%";
+        public void OnGet()
+        {
+            var uptime = _uptimeService.GetUptime();
+            Uptime = $"{uptime.Days}d {uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
+
+            var cpu = _cpuUsageService.GetCpuUsage();
+            CpuUsage = $"{cpu:F2}%";
+        }
     }
 }
