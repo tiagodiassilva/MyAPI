@@ -52,14 +52,18 @@ jobs:
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
 
-    # Build da imagem e push para o ACR
     - name: Build and Push Docker Image
-      run: |
-        az acr build --registry ${{ secrets.ACR_LOGIN_SERVER }} --image myapp:${{ github.sha }} .
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: |
+          ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
         
     # Continuar depois - rever config / deploy
-    #- name: Deploy to Azure Container Apps
-    #  uses: azure/webapps-deploy@v3
-    #  with:
-    #    app-name: myapplab001
-    #    images: acrtiagodsilvalab001/myapp:${{ github.sha }}
+    - name: Deploy to Azure Container Apps
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: myapplab001
+        images: acrtiagodsilvalab001/myapp:${{ github.sha }}
