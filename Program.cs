@@ -29,20 +29,3 @@ app.MapRazorPages();
 app.MapControllers();
 
 app.Run();
-
-// uptime service
-// Classe auxiliar só depois do app.Run() 
-public class UptimeService
-{
-    private readonly DateTime _startTime = DateTime.Now;
-    public TimeSpan GetUptime() => DateTime.Now - _startTime;
-}
-
-// cpu usage service
-private readonly CpuUsageService _cpuUsageService;
-
-public IndexModel(UptimeService uptimeService, CpuUsageService cpuUsageService)
-{
-    _uptimeService = uptimeService;
-    _cpuUsageService = cpuUsageService;
-}
