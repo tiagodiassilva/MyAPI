@@ -12,6 +12,7 @@ env:
   IMAGE_NAME: myapp
   CONTAINER_APP_NAME: myapplab001
   RESOURCE_GROUP: tiagodsilvalab001
+  ACR_SERVER: acrtiagodsilvalab001
 
 jobs:
   build:
@@ -62,4 +63,4 @@ jobs:
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ env.CONTAINER_APP_NAME }}
-        images: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        images: ${{ env.ACR_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
