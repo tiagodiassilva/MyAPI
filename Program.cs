@@ -6,6 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 // registro no DI
 builder.Services.AddSingleton<UptimeService>();
+builder.Services.AddSingleton<CpuUsageService>();
 
 var app = builder.Build();
 
@@ -35,4 +36,13 @@ public class UptimeService
 {
     private readonly DateTime _startTime = DateTime.Now;
     public TimeSpan GetUptime() => DateTime.Now - _startTime;
+}
+
+// cpu usage service
+private readonly CpuUsageService _cpuUsageService;
+
+public IndexModel(UptimeService uptimeService, CpuUsageService cpuUsageService)
+{
+    _uptimeService = uptimeService;
+    _cpuUsageService = cpuUsageService;
 }
