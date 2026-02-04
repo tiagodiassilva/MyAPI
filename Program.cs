@@ -1,21 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// uptime service
-public class UptimeService
-{
-    private readonly DateTime _startTime;
-
-    public UptimeService()
-    {
-        _startTime = DateTime.Now;
-    }
-
-    public TimeSpan GetUptime()
-    {
-        return DateTime.Now - _startTime;
-    }
-}
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
@@ -33,6 +17,22 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// uptime service
+public class UptimeService
+{
+    private readonly DateTime _startTime;
+
+    public UptimeService()
+    {
+        _startTime = DateTime.Now;
+    }
+
+    public TimeSpan GetUptime()
+    {
+        return DateTime.Now - _startTime;
+    }
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -44,3 +44,4 @@ app.MapRazorPages();
 app.MapControllers();
 
 app.Run();
+
