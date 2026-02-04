@@ -55,5 +55,5 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+          ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
