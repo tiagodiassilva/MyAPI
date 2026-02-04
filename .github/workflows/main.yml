@@ -55,12 +55,11 @@ jobs:
     # Build da imagem e push para o ACR
     - name: Build and Push Docker Image
       run: |
-        az acr build --registry ${{ secrets.ACR_LOGIN_SERVER }} \ 
-        --image ${{ env.IMAGE_NAME }}:${{ github.sha }} .
-
+        run: az acr build --registry acrtiagodsilvalab001 --image myapp:${{ github.sha }} .
+        
     # Continuar depois - rever config / deploy
     - name: Deploy to Azure Container Apps
       uses: azure/webapps-deploy@v3
       with:
-        app-name: ${{ env.CONTAINER_APP_NAME }}
-        images: ${{ env.ACR_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        app-name: myapplab001
+        images: acrtiagodsilvalab001/myapp:${{ github.sha }}
