@@ -5,11 +5,13 @@ Este documento detalha as alterações feitas na aplicação `MyApp` para inclui
 ## Alterações Verificadas
 
 ### 1. Integração da API Financeira
-- **Controller**: Criado `FinanceController.cs` com três endpoints:
+- **Controller**: Criado `FinanceController.cs` com cinco endpoints:
     - `GET /api/finance/currency`: Retorna a taxa de câmbio atual de USD para BRL.
     - `GET /api/finance/stock`: Retorna a cotação da bolsa B3 IBOVESPA.
-    - `GET /api/finance/summary`: Retorna ambos os dados de moeda e ações.
-- **Models**: Criado `FinanceModels.cs` para deserializar respostas de APIs externas (AwesomeAPI e HG Brasil).
+    - `GET /api/finance/usd-eur`: Retorna a taxa de câmbio atual de USD para EUR.
+    - `GET /api/finance/nyse`: Retorna a cotação da bolsa de Nova York (NYSE - SPY).
+    - `GET /api/finance/summary`: Retorna todos os dados de moeda e ações.
+- **Models**: Criado `FinanceModels.cs` para deserializar respostas de APIs externas (AwesomeAPI, HG Brasil e Finnhub).
 - **Program.cs**: Registrados `Controllers` e `HttpClient`.
 
 ### 2. Atualização do Dockerfile
@@ -45,4 +47,6 @@ Acesse os endpoints em:
 |--------|----------|-------------|
 | GET | `/api/finance/currency` | Busca a taxa de câmbio USD-BRL |
 | GET | `/api/finance/stock` | Busca detalhes do IBOVESPA |
-| GET | `/api/finance/summary` | Visualização agregada de Moeda e Ações |
+| GET | `/api/finance/usd-eur` | Busca a taxa de câmbio USD-EUR |
+| GET | `/api/finance/nyse` | Busca cotação da NYSE (SPY - S&P 500 ETF) |
+| GET | `/api/finance/summary` | Visualização agregada de todas as moedas e ações |

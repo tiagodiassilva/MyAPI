@@ -58,4 +58,39 @@ namespace MyApp.Models
         [JsonPropertyName("variation")]
         public double Variation { get; set; }
     }
+
+    // USD-EUR Currency Models
+    public class UsdEurResponse
+    {
+        [JsonPropertyName("USDEUR")]
+        public CurrencyInfo? UsdEur { get; set; }
+    }
+
+    // NYSE Stock Models (Finnhub API)
+    public class NyseQuote
+    {
+        [JsonPropertyName("c")]
+        public double CurrentPrice { get; set; }
+
+        [JsonPropertyName("d")]
+        public double Change { get; set; }
+
+        [JsonPropertyName("dp")]
+        public double PercentChange { get; set; }
+
+        [JsonPropertyName("h")]
+        public double HighPrice { get; set; }
+
+        [JsonPropertyName("l")]
+        public double LowPrice { get; set; }
+
+        [JsonPropertyName("o")]
+        public double OpenPrice { get; set; }
+
+        [JsonPropertyName("pc")]
+        public double PreviousClose { get; set; }
+
+        [JsonPropertyName("t")]
+        public long Timestamp { get; set; }
+    }
 }
