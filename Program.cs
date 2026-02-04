@@ -17,22 +17,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// uptime service
-public class UptimeService
-{
-    private readonly DateTime _startTime;
-
-    public UptimeService()
-    {
-        _startTime = DateTime.Now;
-    }
-
-    public TimeSpan GetUptime()
-    {
-        return DateTime.Now - _startTime;
-    }
-}
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -45,3 +29,10 @@ app.MapControllers();
 
 app.Run();
 
+// uptime service
+// Classe auxiliar só depois do app.Run() 
+public class UptimeService
+{
+    private readonly DateTime _startTime = DateTime.Now;
+    public TimeSpan GetUptime() => DateTime.Now - _startTime;
+}
