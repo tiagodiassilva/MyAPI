@@ -58,8 +58,8 @@ jobs:
         az acr build --registry acrtiagodsilvalab001 --image myapp:${{ github.sha }} .
         
     # Continuar depois - rever config / deploy
-    - name: Deploy to Azure Container Apps
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: myapplab001
-        images: acrtiagodsilvalab001/myapp:${{ github.sha }}
+    #- name: Deploy to Azure Container Apps
+    #  uses: azure/webapps-deploy@v3
+    #  with:
+    #    app-name: myapplab001
+    #    images: acrtiagodsilvalab001/myapp:${{ github.sha }}
