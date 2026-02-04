@@ -1,9 +1,27 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// uptime service
+public class UptimeService
+{
+    private readonly DateTime _startTime;
+
+    public UptimeService()
+    {
+        _startTime = DateTime.Now;
+    }
+
+    public TimeSpan GetUptime()
+    {
+        return DateTime.Now - _startTime;
+    }
+}
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
+// registro no DI
+builder.Services.AddSingleton<UptimeService>();
 
 var app = builder.Build();
 
