@@ -1,0 +1,53 @@
+name: Build and Publish to ACR
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  ACR_LOGIN_SERVER: acrtiagodsilvalab001.azurecr.io
+  IMAGE_NAME: myapp
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    - name: Build Solution
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Test
+      # User requested: dotnet test -t --no-build
+      # Note: -t lists tests. To run tests, we normally remove -t. 
+      # I included the command as requested but if you want to RUN tests, use 'dotnet test --no-build'
+      run: dotnet test -t --no-build --configuration Release
+
+    - name: Docker Login
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.ACR_LOGIN_SERVER }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: |
+          ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
