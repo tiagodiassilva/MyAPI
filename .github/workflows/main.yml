@@ -65,5 +65,5 @@ jobs:
     - name: Deploy to Azure Container Apps
       uses: azure/webapps-deploy@v3
       with:
-        app-name: myapplab001
+        app-name: myapplab001-b8fxhefkc2c5guhn.brazilsouth-01.azurewebsites.net
         images: acrtiagodsilvalab001/myapp:${{ github.sha }}
