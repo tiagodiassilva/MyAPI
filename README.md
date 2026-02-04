@@ -14,6 +14,11 @@ Este documento detalha as alterações feitas na aplicação `MyApp` para inclui
 - **Models**: Criado `FinanceModels.cs` para deserializar respostas de APIs externas (AwesomeAPI, HG Brasil e Finnhub).
 - **Program.cs**: Registrados `Controllers` e `HttpClient`.
 
+### 3. Interface do Usuário (Dashboard)
+- **Home Page (`Index.cshtml`)**: Implementada uma interface dashboard que exibe:
+    - **Métricas de Sistema**: Uptime, Uso de CPU e Uso de Memória em tempo real.
+    - **Referência de API**: Tabela integrada com links diretos para todos os endpoints da API financeira.
+
 ### 2. Atualização do Dockerfile
 - **Build Multi-estágio**: Atualizado o `Dockerfile` para usar um processo de build em múltiplos estágios para imagens menores e mais seguras.
 - **Exposição de Porta**: Exposta a porta `8080`.
@@ -31,15 +36,17 @@ Este documento detalha as alterações feitas na aplicação `MyApp` para inclui
 ```bash
 dotnet run
 ```
-Acesse os endpoints em:
-- `http://localhost:5000/api/finance/summary`
+Acesse a aplicação em:
+- **Dashboard/Home**: `http://localhost:5000/` (Para ver métricas e links da API)
+- **API Summary**: `http://localhost:5000/api/finance/summary`
 
 ### Docker
 ```bash
 docker run -p 8080:8080 myapp
 ```
-Acesse os endpoints em:
-- `http://localhost:8080/api/finance/summary`
+Acesse a aplicação em:
+- **Dashboard/Home**: `http://localhost:8080/`
+- **API Summary**: `http://localhost:8080/api/finance/summary`
 
 ## Referência dos Endpoints da API
 
